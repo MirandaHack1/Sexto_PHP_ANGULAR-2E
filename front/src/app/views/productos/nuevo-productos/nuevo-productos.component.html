@@ -1,0 +1,71 @@
+ 
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+    </div>
+    <!--form-->
+    <div class="card-body">
+    <form [formGroup]="producto" (ngSubmit)="grabar()">
+    <div class="mb-2">
+     <label for="ID_tienda"> Tienda </label>
+     
+    <select class="form-control" formControlName="ID_tienda">
+      <option value="0">--Seleccione una opción--</option>
+      @for (producto of ListaTienda; track producto.ID_tienda ) {
+      <option [value]="producto.ID_tienda">
+        {{ producto.Nombre }}
+      </option>
+      }
+    </select>
+  
+    </div>
+   
+       <div class="mb-2">
+        <label for="Nombre_producto"> Nombre_producto </label>
+        <input type="text" class="form-control" formControlName="Nombre_producto"/>
+     <!--  @if (producto.invalid && (producto.dirty || producto.touched)) {
+           <div class="alert">
+             @if (producto.errors?.["required"]) {
+             <div class="ng-invalid">Nombre_producto es requerido</div>
+             }
+           </div>
+           }-->
+       </div>
+       <div class="mb-2">
+        <label for="Precio"> Precio </label>
+        <input type="text" class="form-control" formControlName="Precio"/>
+      <!--  @if (producto.invalid && (producto.dirty || producto.touched)) {
+           <div class="alert">
+             @if (producto.errors?.["required"]) {
+             <div class="ng-invalid">Precio de Venta es requerido</div>
+             }
+           </div>
+           }-->
+       </div>
+       <div class="mb-2">
+        <label for="Stock"> Stock </label>
+        <input type="text" class="form-control" formControlName="Stock"/>
+      <!--  @if (producto.invalid && (producto.dirty || producto.touched)) {
+           <div class="alert">
+             @if (producto.errors?.["required"]) {
+             <div class="ng-invalid">Precio de Venta es requerido</div>
+             }
+           </div>
+           }-->
+       </div>
+       <div class ="mb-2">
+        <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!producto.valid"
+      >
+        Grabar
+      </button>
+      <button class="btn btn-secondary" routerLink="/productos">
+        Cancelar
+      </button>
+       </div>
+       
+ </form>
+   </div>  
+</div> 

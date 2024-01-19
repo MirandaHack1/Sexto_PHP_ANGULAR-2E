@@ -1,0 +1,62 @@
+<div class="card shadow mb-6">
+    <div class="card-header py-5">
+      <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+      <hr />
+      <button class="btn btn-primary" routerLink="/nuevo-productos">Nuevo</button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>ID_tienda</th>
+              <th>Nombre_producto</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (producto of productos; track producto.ID_producto; let i =
+            $index) {
+            <tr>
+              <td>{{ i + 1 }}</td>
+              <td>{{ producto.Nombre }}</td>
+              <td>{{ producto.Nombre_producto }}</td>
+              <td>{{ producto.Precio }}</td>
+              <td>{{ producto.Stock }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-outline-warning"
+                  routerLink="/editar-productos/{{ producto.ID_producto }}"
+                >
+                  Editar
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  (click)="eliminar(producto.ID_producto )"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+            }@empty {
+            <tr>
+              <td colspan="5">No existen registros</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <button (click)="alerta()">mensaje</button>

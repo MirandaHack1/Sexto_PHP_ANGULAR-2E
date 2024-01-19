@@ -1,0 +1,67 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="tiendas" (ngSubmit)="grabar()">
+
+        <div class="mb-2">
+          <label for="Nombre">Nombre</label>
+          <input type="text" class="form-control" formControlName="Nombre" />
+          @if (tiendas.invalid && (tiendas.dirty || tiendas.touched)) {
+          <div class="alert">
+            @if (tiendas.errors?.["required"]) {
+            <div class="ng-invalid">Nombres es requerido</div>
+            }
+          </div>
+          }
+        </div>
+        <div class="mb-2">
+          <label for="Ciudad">Ciudad</label>
+          <input type="text" class="form-control" formControlName="Ciudad" />
+          @if (tiendas.invalid && (tiendas.dirty || tiendas.touched)) {
+          <div class="alert">
+            @if (tiendas.errors?.["required"]) {
+            <div class="ng-invalid">El Ciudad  es requerido</div>
+           }
+          </div>
+          }
+        </div>
+        <div class="mb-2">
+          <label for="Categoria">Categoria</label>
+          <input type="text" class="form-control" formControlName="Categoria" />
+          @if (tiendas.invalid && (tiendas.dirty || tiendas.touched)) {
+          <div class="alert">
+            @if (tiendas.errors?.["required"]) {
+            <div class="ng-invalid">La cantidad  es requerida</div>
+           }
+          </div>
+          }
+        </div>
+        <!-- <div class="mb-2">
+          <label for="Proveedor">Proveedor</label>
+          <input type="text" class="form-control" formControlName="Proveedor" />
+          @if (tiendas.invalid && (tiendas.dirty || tiendas.touched)) {
+          <div class="alert">
+            @if (tiendas.errors?.["required"]) {
+            <div class="ng-invalid"> El nombre del Proveedor  es requerido</div>
+           }
+          </div>
+          }
+        </div> -->
+   
+        <div class="mb-2">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!tiendas.valid"
+          >
+            Grabar
+          </button>
+          <button class="btn btn-secondary" routerLink="/tiendas">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
