@@ -1,115 +1,113 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:8889
--- Tiempo de generación: 10-01-2024 a las 23:49:12
--- Versión del servidor: 5.7.39
--- Versión de PHP: 8.2.0
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 20-01-2024 a las 03:21:39
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Base de datos: `Inventario_Sexto`
+-- Base de datos: `ejercicio13`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Productos`
+-- Estructura de tabla para la tabla `productos`
 --
 
-CREATE TABLE `Productos` (
-  `ProductoId` int(11) NOT NULL,
-  `Nombre` text NOT NULL,
-  `Precio` decimal(8,2) NOT NULL,
-  `Cantidad` int(11) NOT NULL,
-  `FechaIngreso` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `productos` (
+  `ID_producto` int(11) NOT NULL,
+  `ID_tienda` int(11) NOT NULL,
+  `Nombre_producto` varchar(50) NOT NULL,
+  `Precio` double NOT NULL,
+  `Stock` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`ID_producto`, `ID_tienda`, `Nombre_producto`, `Precio`, `Stock`) VALUES
+(3, 3, 'xd', 1, 1),
+(4, 3, 'FUNCIONAXD', 12, 12);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Proveedores`
+-- Estructura de tabla para la tabla `tiendas`
 --
 
-CREATE TABLE `Proveedores` (
-  `ProveedorId` int(11) NOT NULL,
-  `Nombres` text NOT NULL,
-  `Telefono` text NOT NULL,
-  `Correo` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+CREATE TABLE `tiendas` (
+  `ID_tienda` int(11) NOT NULL,
+  `Nombre` varchar(50) NOT NULL,
+  `Ciudad` varchar(50) NOT NULL,
+  `Categoria` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Estructura de tabla para la tabla `Stocks`
+-- Volcado de datos para la tabla `tiendas`
 --
 
-CREATE TABLE `Stocks` (
-  `StockId` int(11) NOT NULL,
-  `ProductoId` int(11) NOT NULL,
-  `ProveedorId` int(11) NOT NULL,
-  `Cantidad` int(11) NOT NULL,
-  `Precio_Venta` decimal(8,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `tiendas` (`ID_tienda`, `Nombre`, `Ciudad`, `Categoria`) VALUES
+(3, 'xd', 'xd', 'xd'),
+(5, 'xd1', 'xd1', 'nuevo');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `Productos`
+-- Indices de la tabla `productos`
 --
-ALTER TABLE `Productos`
-  ADD PRIMARY KEY (`ProductoId`);
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`ID_producto`),
+  ADD KEY `ID_tienda` (`ID_tienda`);
 
 --
--- Indices de la tabla `Proveedores`
+-- Indices de la tabla `tiendas`
 --
-ALTER TABLE `Proveedores`
-  ADD PRIMARY KEY (`ProveedorId`);
-
---
--- Indices de la tabla `Stocks`
---
-ALTER TABLE `Stocks`
-  ADD PRIMARY KEY (`StockId`),
-  ADD KEY `Proveedor_Stock` (`ProveedorId`),
-  ADD KEY `ProductoId` (`ProductoId`);
+ALTER TABLE `tiendas`
+  ADD PRIMARY KEY (`ID_tienda`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `Productos`
+-- AUTO_INCREMENT de la tabla `productos`
 --
-ALTER TABLE `Productos`
-  MODIFY `ProductoId` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `productos`
+  MODIFY `ID_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `Proveedores`
+-- AUTO_INCREMENT de la tabla `tiendas`
 --
-ALTER TABLE `Proveedores`
-  MODIFY `ProveedorId` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `Stocks`
---
-ALTER TABLE `Stocks`
-  MODIFY `StockId` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tiendas`
+  MODIFY `ID_tienda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `Stocks`
+-- Filtros para la tabla `productos`
 --
-ALTER TABLE `Stocks`
-  ADD CONSTRAINT `ProductoId` FOREIGN KEY (`ProductoId`) REFERENCES `Productos` (`ProductoId`),
-  ADD CONSTRAINT `Proveedor_Stock` FOREIGN KEY (`ProveedorId`) REFERENCES `Proveedores` (`ProveedorId`);
+ALTER TABLE `productos`
+  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`ID_tienda`) REFERENCES `tiendas` (`ID_tienda`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
